@@ -7,14 +7,26 @@ import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
 import pic from "../../../assets/images/login.jpg";
 import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
+import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 const Login = () => {
   const [error, setError] = useState("");
 
-  const { signIn, setLoading } = useContext(AuthContext);
+  const { signIn, setLoading,providerLogin } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
 
   const from = location.state?.from?.pathname || '/';
+
+  const googleProvider = new GoogleAuthProvider();
+  const gitHubProvider = new GithubAuthProvider();
+  const handleGoogleSignIn = () => {
+    providerLogin(googleProvider)
+      .then(result => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch(error => console.error(error))
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -102,7 +114,7 @@ const Login = () => {
               <hr className="w-50 me-5" />
             </div>
             <ButtonGroup sm-vertical>
-              <Button
+              <Button onClick={handleGoogleSignIn}
                 className="d-flex justify-content-center align-items-center w-50 "
                 variant="success"
               >

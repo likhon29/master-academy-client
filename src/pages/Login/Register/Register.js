@@ -7,12 +7,32 @@ import { FaGithub, FaGoogle } from "react-icons/fa";
 import account1 from "../../../assets/images/account1.png";
 import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
+import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 const Login = () => {
   const [error, setError] = useState("");
   // const [passwordError, setPasswordError] = useState('');
   const [accept, setAccept] = useState(false);
-  const { createUser, verifyEmail, updateUserProfile } =
+  const { createUser, verifyEmail, updateUserProfile ,providerLogin} =
     useContext(AuthContext);
+  const googleProvider = new GoogleAuthProvider();
+  const gitHubProvider = new GithubAuthProvider();
+  const handleGoogleSignIn = () => {
+    providerLogin(googleProvider)
+      .then(result => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch(error => console.error(error))
+  }
+  
+  // const handleGitHubSignIn = () => {
+  //   providerLogin(googleProvider)
+  //     .then(result => {
+  //       const user = result.user;
+  //       console.log(user);
+  //     })
+  //     .catch(error => console.error(error))
+  // }
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -23,6 +43,8 @@ const Login = () => {
     const password = form.password.value;
     const confirmPassword = form.confirmPassword.value;
     console.log(name, photoURL, email, password, confirmPassword);
+
+
 
     createUser(email, password)
       .then((result) => {
@@ -148,7 +170,7 @@ const Login = () => {
               <hr className="w-50 me-5" />
             </div>
             <ButtonGroup>
-              <Button
+              <Button onClick={handleGoogleSignIn}
                 className="d-flex justify-content-center align-items-center w-75 "
                 variant="success"
               >
