@@ -10,21 +10,21 @@ import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import logo from "../../../assets/images/logo.png";
+import logo from "../../../assets/images/logo1.png";
 import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
 const Header = () => {
     const [isDarkMode, setDarkMode] = useState(false);
-
+    const { user } = useContext(AuthContext);
   const toggleDarkMode = (checked) => {
     setDarkMode(checked);
   };
     return (
-        <div className=" bg-secondary ">
+        <div className="bg-secondary">
       {["lg"].map((expand) => (
   <Navbar key={expand} expand={expand} className=" container mb-3 ">
     <Container fluid>
       <Navbar.Brand className=" text-white" as={Link} to="/">
-        <img src={logo} width="200px" height="100px" alt="" />{" "}
+        <img src={logo} width="300px" height="100px" alt="" />{" "}
       </Navbar.Brand>
       <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
       <Navbar.Offcanvas
@@ -57,7 +57,7 @@ const Header = () => {
             <Nav.Link className=" me-5" as={Link} to="/blogs">
               Blog
             </Nav.Link>
-            <Nav.Link className=" me-5" as={Link} to="/blogs">
+            <Nav.Link className=" me-5" as={Link} to="/">
             <DarkModeSwitch
       
       checked={isDarkMode}
@@ -65,17 +65,17 @@ const Header = () => {
       size={30}
     />
             </Nav.Link>
-               <Nav.Link className=" text-white btn btn-primary px-5" as={Link} to="/login">Login</Nav.Link>
+              
           
             <Nav.Link className="text-white  me-5">
-              {/* {user?.uid ? (
+              {user?.uid ? (
                 <>
                   <span className="text-">{user?.displayName}</span>
 
                   <Button
                     className="ms-2"
                     variant="danger"
-                    onClick={handleLogout}
+                    
                   >
                     Logout
                   </Button>
@@ -90,7 +90,7 @@ const Header = () => {
                     Login
                   </Nav.Link>
                 </>
-              )} */}
+              )}
             </Nav.Link>
           </Nav>
          
