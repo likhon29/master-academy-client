@@ -1,4 +1,5 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
+import { DarkModeSwitch } from 'react-toggle-dark-mode';
 import { Image } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
@@ -12,6 +13,11 @@ import { Link } from "react-router-dom";
 import logo from "../../../assets/images/logo.png";
 import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
 const Header = () => {
+    const [isDarkMode, setDarkMode] = useState(false);
+
+  const toggleDarkMode = (checked) => {
+    setDarkMode(checked);
+  };
     return (
         <div className=" bg-secondary ">
       {["lg"].map((expand) => (
@@ -51,7 +57,15 @@ const Header = () => {
             <Nav.Link className=" me-5" as={Link} to="/blogs">
               Blog
             </Nav.Link>
-               <Nav.Link className=" text-white btn btn-primary px-5" href="/login">Login</Nav.Link>
+            <Nav.Link className=" me-5" as={Link} to="/blogs">
+            <DarkModeSwitch
+      
+      checked={isDarkMode}
+      onChange={toggleDarkMode}
+      size={30}
+    />
+            </Nav.Link>
+               <Nav.Link className=" text-white btn btn-primary px-5" as={Link} to="/login">Login</Nav.Link>
           
             <Nav.Link className="text-white  me-5">
               {/* {user?.uid ? (
