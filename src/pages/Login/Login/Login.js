@@ -62,14 +62,14 @@ const Login = () => {
               <Form.Control
                 type="email"
                 placeholder="Username or Email Address"
-                name="email"
+                name="email" required
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Control
                 type="password"
                 name="password"
-                placeholder="Password"
+                placeholder="Password" required
               />
             </Form.Group>
             <Form.Group
@@ -101,7 +101,7 @@ const Login = () => {
               <p className="mx-2">Or</p>
               <hr className="w-50 me-5" />
             </div>
-            <ButtonGroup sm-vertical={true}>
+            <ButtonGroup sm-vertical>
               <Button
                 className="d-flex justify-content-center align-items-center w-50 "
                 variant="success"
@@ -117,13 +117,7 @@ const Login = () => {
                 {" "}
                 <FaGithub></FaGithub> Continue with Github
               </Button>
-              {/* <Button
-            className="d-flex justify-content-center align-items-center w-50"
-            variant="primary"
-          >
-            {" "}
-            <FaFacebook></FaFacebook> Continue with Facebook
-          </Button> */}
+              
             </ButtonGroup>
           </Form>
         </Col>

@@ -1,9 +1,11 @@
 import React from 'react';
+import CourseLayout from '../../../layout/CourseLayout';
+import NavbarTop from '../NavbarTop/NavbarTop';
 
 const Courses = () => {
     return (
         <div>
-            <h1>Courses</h1>
+            <CourseLayout></CourseLayout>
         </div>
     );
 };
