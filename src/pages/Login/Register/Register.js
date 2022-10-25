@@ -2,8 +2,8 @@ import React, { useContext, useState } from "react";
 import { ButtonGroup, Col, Container, Image, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { FaGithub, FaGoogle } from "react-icons/fa";
 import account1 from "../../../assets/images/account1.png";
 import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
@@ -11,60 +11,63 @@ const Login = () => {
   const [error, setError] = useState("");
   // const [passwordError, setPasswordError] = useState('');
   const [accept, setAccept] = useState(false);
-    const { createUser,verifyEmail,updateUserProfile } = useContext(AuthContext);
+  const { createUser, verifyEmail, updateUserProfile } =
+    useContext(AuthContext);
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const name = form.name.value;
+    const photoURL = form.photoURL.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    const confirmPassword = form.confirmPassword.value;
+    console.log(name, photoURL, email, password, confirmPassword);
 
-  const handleAccept = (event) => {
-    setAccept(event.target.checked);
-    };
-    
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const form = event.target;
-        const name = form.name.value;
-        const photoURL = form.photoURL.value;
-        const email = form.email.value;
-        const password = form.password.value;
-        const confirmPassword = form.confirmPassword.value;
-        console.log(name, photoURL, email, password,confirmPassword);
-      
-        createUser(email, password)
-          .then(result => {
-            const user = result.user;
-            console.log(user)
-            setError('');
-            form.reset();
-            handleUpdateUserProfile(name, photoURL);
-            handleEmailVerification();
-            toast.success('Please verify your email')
-          })
-        .catch(err => {
-          console.error(err.message);
-          setError(err.message);
-        })
-  }
-  
+    createUser(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        setError("");
+        form.reset();
+        // handleUpdateUserProfile(name, photoURL);
+        handleEmailVerification();
+        toast.success("Please verify your email");
+      })
+      .catch((err) => {
+        console.error(err.message);
+        setError(err.message);
+      });
+  };
+
   const handleUpdateUserProfile = (name, photoURL) => {
     const profile = {
-        displayName: name,
-        photoURL: photoURL
-    }
+      displayName: name,
+      photoURL: photoURL,
+    };
     updateUserProfile(profile)
-    .then(() => { })
-    .catch(error => console.error(error));
-}
+      .then(() => {})
+      .catch((error) => console.error(error));
+  };
 
   const handleEmailVerification = () => {
     verifyEmail()
-      .then(() => { })
-    .catch(err => {console.error(err.message);})
-  }
-    // }
+      .then(() => {})
+      .catch((error) => console.error(error));
+  };
+
+  const handleAccept = (event) => {
+    setAccept(event.target.checked);
+  };
+  // }
   return (
     <Container className="">
       <Row>
         <Col lg="6" className="ms-0 ps-0">
-          <Form onSubmit={handleSubmit} className="container w-100 border p-3 rounded bg-secondary text-center">
+          <Form
+            onSubmit={handleSubmit}
+            className="container w-100 border p-3 rounded bg-secondary text-center"
+          >
             <h2 className="text-center">Create an account</h2>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Control
@@ -84,22 +87,24 @@ const Login = () => {
               <Form.Control
                 type="email"
                 placeholder="Username or Email"
-                              name="email"
-                              required
+                name="email"
+                required
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Control
                 type="password"
                 name="password"
-                placeholder="Password" required
+                placeholder="Password"
+                required
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Control
                 type="password"
                 name="confirmPassword"
-                placeholder="Confirm Your Password" required
+                placeholder="Confirm Your Password"
+                required
               />
             </Form.Group>
             {/* <Form.Text className="text-danger">{passwordError}</Form.Text> */}
@@ -120,9 +125,7 @@ const Login = () => {
                 }
               />
             </Form.Group>
-            <Form.Text className="text-danger">
-                {error}
-            </Form.Text>
+            <Form.Text className="text-danger">{error}</Form.Text>
             <Button
               variant="warning"
               className="w-75 "
@@ -160,7 +163,6 @@ const Login = () => {
                 {" "}
                 <FaGithub className=""></FaGithub> Continue with Github
               </Button>
-            
             </ButtonGroup>
           </Form>
         </Col>
@@ -174,21 +176,20 @@ const Login = () => {
 
 export default Login;
 
-
 //   if (!/(?=.*[A-Z].*[A-Z])/.test(password)) {
-      //     setPasswordError('Please provide at least two uppercase');
-      //     return;
-      // }
-      // if (password.length < 6) {
-      //     setPasswordError('Please should be at least 6 characters.');
-      //     return;
-      // }
-      // if (!/(?=.*[!@#$&*])/.test(password)) {
-      //     setPasswordError('Please add at least one special character');
-      //   return;
-      // }
-      // setPasswordError('');
-      // if (password === confirmPassword) {
-      //     setError("Password did not match,Try Again")
-      // }
-      // else {
+//     setPasswordError('Please provide at least two uppercase');
+//     return;
+// }
+// if (password.length < 6) {
+//     setPasswordError('Please should be at least 6 characters.');
+//     return;
+// }
+// if (!/(?=.*[!@#$&*])/.test(password)) {
+//     setPasswordError('Please add at least one special character');
+//   return;
+// }
+// setPasswordError('');
+// if (password === confirmPassword) {
+//     setError("Password did not match,Try Again")
+// }
+// else {

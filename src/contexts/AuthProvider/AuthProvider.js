@@ -19,21 +19,27 @@ const AuthProvider = ({ children }) => {
 
     // user create
     const createUser = (email, password) => {
+        setLoading(true);
+
         return createUserWithEmailAndPassword(auth, email, password);
     }
 
 
     const signIn = (email, password) => {
+        setLoading(true);
+
         return signInWithEmailAndPassword(auth, email, password);
     }
 
-    const verifyEmail = () => {
+    const verifyEmail = () =>{
         return sendEmailVerification(auth.currentUser);
     }
     const updateUserProfile = (profile) => {
         return updateProfile(auth.currentUser, profile);
     }
     const logOut = () => {
+        setLoading(true);
+
         return signOut(auth);
     }
     useEffect(() => {
