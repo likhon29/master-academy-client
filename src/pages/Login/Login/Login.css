@@ -1,0 +1,16 @@
+@media only screen and (max-width: 600px) {
+    .login{
+        flex-direction: column-reverse; 
+        margin:0 auto;
+        padding:25px;
+    }
+    /* .img-container{
+        
+    } */
+    .img-container img{
+        width: 100%;
+        height: 100%;
+        border-radius:50%;
+        padding-bottom: 20px;
+    }
+ }

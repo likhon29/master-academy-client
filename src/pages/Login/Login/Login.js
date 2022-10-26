@@ -8,10 +8,11 @@ import pic from "../../../assets/images/login.jpg";
 import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
 import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
+import './Login.css'
 const Login = () => {
   const [error, setError] = useState("");
 
-  const { signIn, setLoading,providerLogin } = useContext(AuthContext);
+  const { signIn, setLoading,providerLogin,setUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -19,15 +20,26 @@ const Login = () => {
 
   const googleProvider = new GoogleAuthProvider();
   const gitHubProvider = new GithubAuthProvider();
+
   const handleGoogleSignIn = () => {
     providerLogin(googleProvider)
       .then(result => {
         const user = result.user;
         console.log(user);
+        navigate(from, { replace: true });
       })
       .catch(error => console.error(error))
   }
 
+  const handleGitHubSignIn = () => {
+    providerLogin(gitHubProvider)
+      .then(result => {
+        const user = result.user;
+        console.log(user);
+        navigate(from, { replace: true });
+      })
+      .catch(error => console.error(error))
+  }
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -43,13 +55,15 @@ const Login = () => {
         console.log(user);
         form.reset();
         setError('');
-        if (user.emailVerified) {
-          navigate(from, { replace: true });
+        navigate(from, { replace: true });
           toast.success("Welcome to Master Academy...");
-        }
-        else {
-          toast.error("Your email is not verified.Please Verify your email")
-        }
+        // if (user.emailVerified) {
+        //   navigate(from, { replace: true });
+        //   toast.success("Welcome to Master Academy...");
+        // }
+        // else {
+        //   toast.error("Your email is not verified.Please Verify your email")
+        // }
       })
       .catch(error => {
         console.error(error.message);
@@ -61,9 +75,9 @@ const Login = () => {
     
   }
   return (
-    <Container className="my-5 py-5">
+    <Container className="login my-5 py-5">
       <Row>
-        <Col lg="6" className="me-0 pe-0">
+        <Col lg="6" className="img-container me-0 pe-0">
           <Image src={pic} width="600" height="400" className=""></Image>
         </Col>
 
@@ -122,7 +136,7 @@ const Login = () => {
                 <FaGoogle></FaGoogle> Continue with Google
               </Button>
 
-              <Button
+              <Button onClick={handleGitHubSignIn}
                 className="d-flex justify-content-center align-items-center w-50"
                 variant="dark"
               >

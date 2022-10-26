@@ -3,14 +3,19 @@ import { Col, Container, Row, Jumbotron, Button, Image } from "react-bootstrap";
 import "./Home.css";
 import { Link, useLoaderData } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
+import AllCourses from "../../Courses/AllCourses/AllCourses";
+import CourseCard from "../../Courses/CourseCard/CourseCard";
+import CourseCardHome from "./CourseCardHome";
+import bg from '../../../assets/images/bg.jpg'
 const Home = () => {
   const allCourses = useLoaderData();
-  console.log(allCourses);
+  
   return (
-    <div className="home pt-5">
-      <Container className="d-flex pr-0  pt-5">
-        <Row className="justify-content-center align-items-center">
-          <Col sm={4} xl={6}>
+    <div className="">
+<div className="hero">
+      <Container className="hero d-flex px-5  pr-0  pt-0">
+        <Row className=" justify-content-center align-items-center w-100 ">
+          <Col sm={6} xl={6}>
             <div className="container  ">
               <h1 className="fs-1 m-4 text-warning">Master Academy</h1>
               <h2 className="fs-3 m-3 text-danger">
@@ -18,7 +23,7 @@ const Home = () => {
               </h2>
 
               <div className="btn-container m-5">
-                <Link className="btn bg-white text-success p-3 w-25">
+                <Link className="btn bg-white text-success p-3 m-2">
                   Courses
                 </Link>
                 <Link className="btn bg-success text-white p-3 ms-2 ">
@@ -29,14 +34,28 @@ const Home = () => {
           </Col>
           <Col sm={6} xl={6}>
             <Image
-              width="600"
-              height="400"
-              src="https://shikho.com/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fcross-border-education-technologies-pte-ltd%2Fimage%2Fupload%2Fv1656655473%2Fpma7gkdj9tmieyhazugz.png&w=828&q=75"
+              width="1000"
+              height="500"
+              src={bg}
             ></Image>
           </Col>
         </Row>
+        
+
+       
+       
       </Container>
+      
+      </div>
+      <h3 className="text-center bg-success my-4 text-warning p-3">Our all Courses</h3>
+      <div className="container mx-auto  courseContainer">
+       
+        {
+          allCourses.map(course =><CourseCardHome key={course.id} course={course}></CourseCardHome>)
+        }
+        </div>
     </div>
+    
   );
 };
 

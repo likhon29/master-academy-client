@@ -1,5 +1,37 @@
-.home{
-    height:600px;
-    background-image: linear-gradient(90deg, rgb(35, 48, 113), rgb(35, 48, 113));
-    margin-top: -16px;
+.hero{
+    margin-top:-50px;
+    /* height:500px; */
+    /* padding:120px; */
+    background-image: linear-gradient(30deg, rgb(35, 48, 113), rgb(70, 91, 193));
 }
+.courseContainer{
+    margin:20px 100px;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap:20px;
+}
+@media only screen and (max-width: 600px) {
+    .hero{
+        margin:0;
+       text-align: center;
+        display: flex;
+        margin-top:0;
+        flex-direction: column;
+        padding:0;
+        background-image: url(../../../assets/images/bg.jpg);
+    }
+    .hero img{
+        display: none;
+    }
+    .btn-container{
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .courseContainer{
+        
+        grid-template-columns: repeat(1,1fr);
+        padding:0 40px;
+        /* gap:20px; */
+    }
+  }

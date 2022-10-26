@@ -1,0 +1,10 @@
+@media only screen and (max-width: 600px) {
+   .features,.header{
+     flex-direction: column;  
+     justify-content:center; 
+    }
+    .header btn{
+        margin-left:0;
+        padding-left: 0;
+    }
+}

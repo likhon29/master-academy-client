@@ -1,19 +1,36 @@
 import React from 'react';
-import {useLoaderData} from 'react-router-dom'
-import CourseCard from '../CourseCard/CourseCard';
+import { Col, Container, Row } from "react-bootstrap";
+import { useLoaderData } from "react-router-dom";
+import CourseCard from "../CourseCard/CourseCard";
+import LeftNav from "../LeftNav/LeftNav";
 import './CourseContainer.css'
 const CourseContainer = () => {
-    const courses = useLoaderData();
-    console.log(courses);
+  const courses = useLoaderData();
+  console.log(courses);
+    // const sscCourses = courses.filter(course => course.category_name === 'ssc');
+    // console.log(sscCourses);
     return (
-        <div>
-            <h1>Number of Courses:{courses.length}</h1>
-            <div className="course-container">
+    <Container className="mt-4">
+     
+      <Row >
+        <Col lg="9">
+        <h4>All Courses Category:{courses.length}</h4>
+      <div className="course-container">
+        {courses.map((course) => (
+          <CourseCard key={course.id} course={course}></CourseCard>
+        ))}
+      </div>
+        </Col>
+          <Col lg="3">
+          <h5>Course List</h5>
             {
-                courses.map((course) => <CourseCard key={course.id} course={course}></CourseCard>)
+              courses.map((course) => <LeftNav key={course.id} course={course}></LeftNav> )
             }
-           </div>
-        </div>
+          
+      
+        </Col>
+      </Row>
+    </Container>
     );
 };
 

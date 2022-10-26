@@ -10,12 +10,12 @@ const CourseLayout = () => {
         <NavbarTop></NavbarTop>
       </Row>
       <Row>
-        <Col lg="9">
+        <Col lg="12">
           <Outlet></Outlet>
         </Col>
-        <Col lg="3">
+        {/* <Col lg="3">
           <LeftNav></LeftNav>
-        </Col>
+        </Col> */}
       </Row>
     </Container>
   );

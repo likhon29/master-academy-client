@@ -12,20 +12,27 @@ import { FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import logo from "../../../assets/images/logo1.png";
 import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
+import "./Header.css";
 const Header = () => {
   const [isDarkMode, setDarkMode] = useState(false);
   const { user, logOut } = useContext(AuthContext);
   const toggleDarkMode = (checked) => {
     setDarkMode(checked);
   };
-  console.log(user)
+  const renderTooltip = (props) => (
+    <Tooltip id="button-tooltip" {...props}>
+      {user?.displayName}
+    </Tooltip>
+  );
   const handleLogOut = () => {
     logOut()
       .then(() => {})
       .catch((error) => console.error(error));
   };
   return (
-    <div className="bg-secondary mb-0 pb-0">
+    <div className="header-container ">
       {["lg"].map((expand) => (
         <Navbar key={expand} expand={expand} className=" container mb-3 ">
           <Container fluid>
@@ -45,7 +52,7 @@ const Header = () => {
               </Offcanvas.Header>
               <Offcanvas.Body>
                 <Nav className=" justify-content-end flex-grow-1 px-5 fs-5">
-                  <Nav.Link className=" me-5 " as={Link} to="/">
+                  <Nav.Link className=" me-5" as={Link} to="/">
                     Home
                   </Nav.Link>
                   <Nav.Link className=" me-5" as={Link} to="/courses">
@@ -57,36 +64,54 @@ const Header = () => {
                   <Nav.Link className=" me-5" as={Link} to="/blogs">
                     Blog
                   </Nav.Link>
-                  <DarkModeSwitch className="mt-2 me-5"
+                  <DarkModeSwitch
+                    className="mt-2 me-5"
                     checked={isDarkMode}
                     onChange={toggleDarkMode}
                     size={33}
                   />
                   <Link to="/profile">
-                    {user ? <> {
-                      user?.photoURL ?
-                      <Image
-                          style={{ height: '30px' }}
-                          roundedCircle
-                          src={user?.photoURL}>
-                      </Image>
-                      : <FaUser className="fs-2 mt-2"></FaUser>
-
-                    }
-                      
-                    </>
-                      :
+                    {user ? (
+                      <>
+                        {" "}
+                        <OverlayTrigger
+                          placement="right"
+                          delay={{ show: 250, hide: 400 }}
+                          overlay={renderTooltip}
+                        >
+                          {user?.photoURL ? (
+                            <>
+                              <Image
+                                className="fs-5"
+                                style={{ height: "40px", marginTop: "7px" }}
+                                roundedCircle
+                                src={user?.photoURL}
+                                title={user?.displayName}
+                              ></Image>
+                            </>
+                          ) : (
+                            <FaUser
+                              title={user?.displayName}
+                              className="fs-2 mt-2"
+                            ></FaUser>
+                          )}
+                        </OverlayTrigger>
+                      </>
+                    ) : (
                       <></>
-                     
-                            }
-                        </Link>
-                  <Nav.Link className="text-white  me-5">
-                    <>
+                    )}
+                  </Link>
+                  {/* <Nav.Link className="text-white  me-5"> */}
+                  <>
                     {user?.uid ? (
                       <>
                         {/* <span className="text-">{user?.displayName}</span> */}
 
-                          <Button onClick={handleLogOut} className="ms-2" variant="danger">
+                        <Button
+                          onClick={handleLogOut}
+                          className="ms-2"
+                          variant="danger"
+                        >
                           Logout
                         </Button>
                       </>
@@ -101,8 +126,8 @@ const Header = () => {
                         </Nav.Link>
                       </>
                     )}
-                    </>
-                  </Nav.Link>
+                  </>
+                  {/* </Nav.Link> */}
                 </Nav>
               </Offcanvas.Body>
             </Navbar.Offcanvas>

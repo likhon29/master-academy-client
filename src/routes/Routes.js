@@ -2,13 +2,16 @@ import { createBrowserRouter } from "react-router-dom";
 import CourseLayout from "../layout/CourseLayout";
 import Main from "../layout/Main";
 import Blogs from "../pages/Blogs/Blogs";
+import CheckOut from "../pages/CheckOut/CheckOut";
 import AllCourses from "../pages/Courses/AllCourses/AllCourses";
 import CourseContainer from "../pages/Courses/CourseContainer/CourseContainer";
+import CourseDetail from "../pages/Courses/CourseDetail/CourseDetail";
 import Courses from "../pages/Courses/Courses/Courses";
 import Home from "../pages/Home/Home/Home";
 import Login from "../pages/Login/Login/Login";
 import Register from "../pages/Login/Register/Register";
 import NotFound from "../pages/Others/NotFound/NotFound";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
 
 export const routes = createBrowserRouter([
   {
@@ -18,39 +21,69 @@ export const routes = createBrowserRouter([
             {
                 path: "/",
                 element: <Home></Home>,
-                // loader: () => fetch('http://localhost:5000/allCourses')
+                loader: () => fetch('http://localhost:5000/allCourses')
             },
             {
-                path: "/courses",
+                path: "/courses/",
                 element: <Courses></Courses>,
                 children: [
+                
                     {
-                        path: "/courses/allCourses",
-                        element: <AllCourses></AllCourses>,
+                        path: "/courses/",
+                        element: <CourseContainer></CourseContainer>,
                         loader: ()=>fetch('http://localhost:5000/allCourses')
                     },
                     {
-                        path: "/courses/:group",
-                        element: <CourseContainer></CourseContainer>,
-                        loader : ({params})=> fetch(`http://localhost:5000/courses/${params.group}`)
+                        path: "/courses/:id",
+                        element: <CourseDetail></CourseDetail>,
+                        loader : ({params})=> fetch(`http://localhost:5000/courses/${params.id}`)
                     },
-                    {
-                        path: "/courses/c",
-                        element: <h1>c</h1>
-                    },
-                    {
-                        path: "/courses/d",
-                        element: <h1>d</h1>
-                    }
+                    // {
+                    //     path: '/:group',
+                    //     element: <CourseContainer></CourseContainer>,
+                    //     loader: ({params})=> fetch(`http://localhost:3002/courses/category/${params.group}`)
+                    // },
+                    // {
+                    //     path: "/courses/:group/:id",
+                    //     element: <CourseContainer></CourseContainer>,
+                    //     loader : ({params})=> fetch(`http://localhost:5000/courses/${params.group}/${params.id}`)
+                    // },
+                    
+                    // {
+                    //     path: "/courses/allCourses/:id",
+                    //     element: <CourseDetail></CourseDetail>,
+                    //     loader : ({params})=> fetch(`http://localhost:5000/course/${params.id}`)
+                    // },
+                    // {
+                    //     path: "/courses/allCourses/:id",
+                    //     element: <CourseDetail></CourseDetail>,
+                    //     loader : ({params})=> fetch(`http://localhost:5000/course/${params.id}`)
+                    // },
+                    // {
+                    //     path: "/courses/ssc/:id",
+                    //     element: <CourseDetail></CourseDetail>,
+                    //     loader : ({params})=> fetch(`http://localhost:5000/courses/${params.id}`)
+                    // },
+                    // {
+                    //     path: "/courses/hsc/:id",
+                    //     element: <CourseDetail></CourseDetail>,
+                    //     loader : ({params})=> fetch(`http://localhost:5000/courses/${params.id}`)
+                    // },
+                    
                 ]
             }
             , 
-            {
-                    path: 'courses/allCourses',
-                    element: <AllCourses></AllCourses>
-            }
             
-            , {
+            // {
+            //         path: 'courses/allCourses',
+            //         element: <AllCourses></AllCourses>
+            // }
+            {
+                path: '/enroll/:id',
+                element: <PrivateRoute><CheckOut></CheckOut></PrivateRoute>,
+                loader: ({params})=>fetch(`http://localhost:5000/courses/${params.id}`)
+            },
+             {
                 path: '/blogs',
                 element : <Blogs></Blogs>,
             },
@@ -69,3 +102,34 @@ export const routes = createBrowserRouter([
         element: <NotFound></NotFound>
       }
 ]);
+
+
+// {
+//     path: "/courses/allCourses",
+//     element: <AllCourses></AllCourses>,
+//     loader: ()=>fetch('http://localhost:5000/allCourses')
+// },
+// {
+//     path: "/courses/:group",
+//     element: <CourseContainer></CourseContainer>,
+//     loader : ({params})=> fetch(`http://localhost:5000/courses/${params.group}`)
+// },
+// {
+//     path: "/courses/allCourses/:id",
+//     element: <CourseDetail></CourseDetail>,
+//     loader : ({params})=> fetch(`http://localhost:5000/course/${params.id}`)
+// },
+// {
+//     path: "/courses/ssc/:id",
+//     element: <CourseDetail></CourseDetail>,
+//     loader : ({params})=> fetch(`http://localhost:5000/course/${params.id}`)
+// },
+// {
+//     path: "/courses/hsc/:id",
+//     element: <CourseDetail></CourseDetail>,
+//     loader : ({params})=> fetch(`http://localhost:5000/course/${params.id}`)
+// },
+// {
+//     path: "/courses/d",
+//     element: <h1>d</h1>
+// }

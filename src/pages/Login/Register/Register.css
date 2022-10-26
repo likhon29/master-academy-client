@@ -1,0 +1,11 @@
+@media only screen and (max-width: 600px) {
+    .register{
+        flex-direction: column-reverse; 
+        margin: 0 5px;
+    }
+    .img-container img{
+        width: 100%;
+        height: 100%;
+        border-radius:50%
+    }
+ }

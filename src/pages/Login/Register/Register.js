@@ -2,25 +2,40 @@ import React, { useContext, useState } from "react";
 import { ButtonGroup, Col, Container, Image, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { Link } from "react-router-dom";
+import { Link ,useNavigate} from "react-router-dom";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import account1 from "../../../assets/images/account1.png";
 import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
 import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
+import './Register.css'
 const Login = () => {
   const [error, setError] = useState("");
   // const [passwordError, setPasswordError] = useState('');
   const [accept, setAccept] = useState(false);
-  const { createUser, verifyEmail, updateUserProfile ,providerLogin} =
+  const { createUser, verifyEmail, updateUserProfile ,providerLogin,loading,setLoading,} =
     useContext(AuthContext);
   const googleProvider = new GoogleAuthProvider();
   const gitHubProvider = new GithubAuthProvider();
+  const navigate = useNavigate();
   const handleGoogleSignIn = () => {
+    setLoading(true);
     providerLogin(googleProvider)
       .then(result => {
         const user = result.user;
         console.log(user);
+      })
+      .catch(error => console.error(error))
+  }
+
+  
+  const handleGitHubSignIn = () => {
+    setLoading(true);
+    providerLogin(gitHubProvider)
+      .then(result => {
+        const user = result.user;
+        console.log(user);
+        handleEmailVerification();
       })
       .catch(error => console.error(error))
   }
@@ -52,9 +67,10 @@ const Login = () => {
         console.log(user);
         setError("");
         form.reset();
-        // handleUpdateUserProfile(name, photoURL);
+        handleUpdateUserProfile(name, photoURL);
         handleEmailVerification();
         toast.success("Please verify your email");
+        navigate('/')
       })
       .catch((err) => {
         console.error(err.message);
@@ -83,10 +99,13 @@ const Login = () => {
   };
   // }
   return (
-    <Container className="">
+    <Container className="register">
       <Row>
+        <Col lg="6" className="img-container me-0 pt-5">
+          <Image src={account1} width="550" height="450" className=""></Image>
+        </Col>
         <Col lg="6" className="ms-0 ps-0">
-          <Form
+        <Form
             onSubmit={handleSubmit}
             className="container w-100 border p-3 rounded bg-secondary text-center"
           >
@@ -178,7 +197,7 @@ const Login = () => {
                 <FaGoogle></FaGoogle> Continue with Google
               </Button>
 
-              <Button
+              <Button onClick={handleGitHubSignIn}
                 className="d-flex justify-content-center align-items-center w-75"
                 variant="dark"
               >
@@ -187,9 +206,6 @@ const Login = () => {
               </Button>
             </ButtonGroup>
           </Form>
-        </Col>
-        <Col lg="6" className="me-0 pt-5">
-          <Image src={account1} width="550" height="450" className=""></Image>
         </Col>
       </Row>
     </Container>
