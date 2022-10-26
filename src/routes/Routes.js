@@ -7,6 +7,7 @@ import AllCourses from "../pages/Courses/AllCourses/AllCourses";
 import CourseContainer from "../pages/Courses/CourseContainer/CourseContainer";
 import CourseDetail from "../pages/Courses/CourseDetail/CourseDetail";
 import Courses from "../pages/Courses/Courses/Courses";
+import FAQ from "../pages/FAQ/FAQ";
 import Home from "../pages/Home/Home/Home";
 import Login from "../pages/Login/Login/Login";
 import Register from "../pages/Login/Register/Register";
@@ -82,6 +83,10 @@ export const routes = createBrowserRouter([
                 path: '/enroll/:id',
                 element: <PrivateRoute><CheckOut></CheckOut></PrivateRoute>,
                 loader: ({params})=>fetch(`http://localhost:5000/courses/${params.id}`)
+            },
+             {
+                path: '/faq',
+                element : <FAQ></FAQ>,
             },
              {
                 path: '/blogs',
