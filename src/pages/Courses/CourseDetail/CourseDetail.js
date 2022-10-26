@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Card, Col, Container, Row } from "react-bootstrap";
+import { Button, Card, Col, Container, Image, Row } from "react-bootstrap";
 import Pdf from "react-to-pdf";
 import { useLoaderData,Link } from "react-router-dom";
 import LeftNav from "../LeftNav/LeftNav";
@@ -15,7 +15,7 @@ const CourseDetail = () => {
     course_group,
     course_duration,
     lecture_quantity,
-    course_img,
+    course_img,course_mentor
   } = courseInfo;
   return (
     <div className="container">
@@ -36,7 +36,7 @@ const CourseDetail = () => {
         <Card.Body ref={ref}>
               <div  className="features d-flex justify-content-between text-success">
               <Card.Text >
-                <span style={{color:'orangered'}}>Features</span>  
+                <span style={{color:"black", borderBottom:'3px solid '}}>Features</span>  
                   <ul>
                     <li>
                     Offers Convenience And Flexibility
@@ -53,7 +53,7 @@ const CourseDetail = () => {
                   </ul>
                 </Card.Text>
                 <Card.Text>
-                <span style={{color:'orangered'}}>Course Info</span>
+                <span style={{color:"black", borderBottom:'3px solid '}}>Course Info</span>
                   <ul>
             <li>For {course_group} - 2023</li>
             <li>Course Duration: {course_duration}</li>
@@ -62,8 +62,25 @@ const CourseDetail = () => {
           </ul>
           </Card.Text>
           </div>
+          <span style={{color:"black", borderBottom:'3px solid '}}>Mentors</span>
+
+          <div  className="features d-flex justify-content-between">
+                <Card.Text className="features d-flex justify-content-between text-success" >
+                  
+                  {
+                    course_mentor.map(m => <div>
+                      <Image src={m.img} className="mx-4  fs-5"
+                                style={{ height: "40px", marginTop: "7px",borderTop: "1px solid orangered"}}
+                                roundedCircle></Image>
+                      <span style={{color:"orangered"}} >{ m.name}</span>
+                    </div>)
+                 }
+                </Card.Text>
+                <Card.Text>
+                <Link className="text-center" to={`/enroll/${courseInfo.id}`}><Button style={{backgroundColor: 'orangered', color:'white',}} variant="">Get premium access</Button></Link>
+          </Card.Text>
+          </div>
           
-          <Link className="text-center" to={`/enroll/${courseInfo.id}`}><Button style={{backgroundColor: 'orangered', color:'white',}} variant="">Get premium access</Button></Link>
           
         </Card.Body>
       </Card></Col>

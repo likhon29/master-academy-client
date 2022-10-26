@@ -14,7 +14,7 @@ const CheckOut = () => {
         toast.success("Thank you for checking out!!!")
     }
     return (
-        <div className="container  ">
+        <div className="container my-5 mb-5 py-5">
             <h2>Check-Out Courses</h2>
         <Card className="mx-auto" style={{ width: '350px' ,border: '1px solid orange'}}>
       <Card.Img variant="top" src={course_img} />
