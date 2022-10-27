@@ -29,18 +29,18 @@ const CheckOut = () => {
             />
             <Form.Control
              
-              defaultValue={`Course Price: ${course_prize}`}
+              defaultValue={`Course Price: ${course_prize} TK` }
               className="m-2" readOnly
             />
             <Form.Control
              
-              defaultValue={`VAT: ${course_prize * .15}`}
+              defaultValue={`VAT: ${course_prize * .15} TK`}
               className="m-2"
               aria-label="Search" readOnly
             />
             <Form.Control
              
-              defaultValue={`Total Price: ${(parseInt(course_prize) + (parseInt(course_prize)*0.15))}`}
+              defaultValue={`Total Price: ${(parseInt(course_prize) + (parseInt(course_prize)*0.15))} TK`}
               className="m-2"
               aria-label="Search" readOnly
             />

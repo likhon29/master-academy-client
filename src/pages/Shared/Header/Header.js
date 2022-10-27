@@ -73,7 +73,7 @@ const Header = () => {
                         {" "}
                         <OverlayTrigger
                           placement="right"
-                          delay={{ show: 250, hide: 400 }}
+                          delay={{ show: 50, hide: 400 }}
                           overlay={renderTooltip}
                         >
                           {user?.photoURL ? (

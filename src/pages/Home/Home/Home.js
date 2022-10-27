@@ -34,7 +34,7 @@ const Home = () => {
           </Col>
           <Col sm={6} xl={6}>
             <Image
-              width="1000"
+              width="129%"
               height="500"
               src={bg}
             ></Image>
