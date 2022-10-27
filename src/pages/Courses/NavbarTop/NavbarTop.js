@@ -13,19 +13,7 @@ import { useEffect } from "react";
 
 const NavbarTop = () => {
  
-    // useEffect(() => {
-    //     fetch("http://localhost:5000/allCourses")
-    //       .then((res) => res.json())
-    //       .then((data) => filterData(data));
-    //   }, []);
-    
-    //     const filterData = (data) => {
-    //         console.log(data);
-    //         const sscCourses = data.filter(c => c.category_name === "ssc");
-    //         const hscCourses = data.filter(c => c.category_name === "hsc");
-    //         console.log(sscCourses);
-    //         console.log(hscCourses);
-    //     }
+   
   return (
     <div className="container top">
       <Navbar
@@ -43,14 +31,14 @@ const NavbarTop = () => {
                 All
               </Nav.Link>
 
-              <Nav.Link className=" me-5" as={Link} to="">
+              <Nav.Link className=" me-5" as={Link} to="ssc">
                 SSC
               </Nav.Link>
               <Nav.Link
                 className=" me-5"
                 
                 as={Link}
-                to=""
+                to="hsc"
               >
                 HSC
               </Nav.Link>

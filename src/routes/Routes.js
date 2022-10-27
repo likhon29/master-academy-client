@@ -7,6 +7,8 @@ import AllCourses from "../pages/Courses/AllCourses/AllCourses";
 import CourseContainer from "../pages/Courses/CourseContainer/CourseContainer";
 import CourseDetail from "../pages/Courses/CourseDetail/CourseDetail";
 import Courses from "../pages/Courses/Courses/Courses";
+import HscCourseContainer from "../pages/Courses/HscCourseContainer/HscCourseContainer";
+import SscCourseContainer from "../pages/Courses/SscCourseContainer/SscCourseContainer";
 import FAQ from "../pages/FAQ/FAQ";
 import Home from "../pages/Home/Home/Home";
 import Login from "../pages/Login/Login/Login";
@@ -22,7 +24,7 @@ export const routes = createBrowserRouter([
             {
                 path: "/",
                 element: <Home></Home>,
-                loader: () => fetch('http://localhost:5000/allCourses')
+                loader: () => fetch('https://master-academy-server.vercel.app/allCourses')
             },
             {
                 path: "/courses/",
@@ -32,12 +34,24 @@ export const routes = createBrowserRouter([
                     {
                         path: "/courses/",
                         element: <CourseContainer></CourseContainer>,
-                        loader: ()=>fetch('http://localhost:5000/allCourses')
+                        loader: ()=>fetch('https://master-academy-server.vercel.app/allCourses')
                     },
                     {
                         path: "/courses/:id",
                         element: <CourseDetail></CourseDetail>,
-                        loader : ({params})=> fetch(`http://localhost:5000/courses/${params.id}`)
+                        loader : ({params})=> fetch(`https://master-academy-server.vercel.app/courses/${params.id}`)
+                    },
+                    {
+                        path: "/courses/ssc",
+                        element: <SscCourseContainer></SscCourseContainer>,
+                        // loader: ()=>fetch('https://master-academy-server.vercel.app/allCourses')
+        
+                    },
+                    {
+                        path: "/courses/hsc",
+                        element: <HscCourseContainer></HscCourseContainer>,
+                        // loader: ()=>fetch('https://master-academy-server.vercel.app/allCourses')
+        
                     },
                     // {
                     //     path: '/:group',
@@ -60,11 +74,16 @@ export const routes = createBrowserRouter([
                     //     element: <CourseDetail></CourseDetail>,
                     //     loader : ({params})=> fetch(`http://localhost:5000/course/${params.id}`)
                     // },
-                    // {
-                    //     path: "/courses/ssc/:id",
-                    //     element: <CourseDetail></CourseDetail>,
-                    //     loader : ({params})=> fetch(`http://localhost:5000/courses/${params.id}`)
-                    // },
+                    {
+                        path: "/courses/ssc/:id",
+                        element: <CourseDetail></CourseDetail>,
+                        loader : ({params})=> fetch(`https://master-academy-server.vercel.app/courses/${params.id}`)
+                    },
+                    {
+                        path: "/courses/hsc/:id",
+                        element: <CourseDetail></CourseDetail>,
+                        loader : ({params})=> fetch(`https://master-academy-server.vercel.app/courses/${params.id}`)
+                    },
                     // {
                     //     path: "/courses/hsc/:id",
                     //     element: <CourseDetail></CourseDetail>,
@@ -74,7 +93,12 @@ export const routes = createBrowserRouter([
                 ]
             }
             , 
-            
+            {
+                path: "/courses/ssc",
+                element: <SscCourseContainer></SscCourseContainer>,
+                // loader: ()=>fetch('https://master-academy-server.vercel.app/allCourses')
+
+            },
             // {
             //         path: 'courses/allCourses',
             //         element: <AllCourses></AllCourses>
@@ -82,7 +106,7 @@ export const routes = createBrowserRouter([
             {
                 path: '/enroll/:id',
                 element: <PrivateRoute><CheckOut></CheckOut></PrivateRoute>,
-                loader: ({params})=>fetch(`http://localhost:5000/courses/${params.id}`)
+                loader: ({params})=>fetch(`https://master-academy-server.vercel.app/courses/${params.id}`)
             },
              {
                 path: '/faq',
