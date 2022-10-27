@@ -23,10 +23,10 @@ const Home = () => {
               </h2>
 
               <div className="btn-container m-5">
-                <Link className="btn bg-white text-success p-3 m-2">
+                <Link to="/courses" className="btn bg-white text-success p-3 m-2">
                   Courses
                 </Link>
-                <Link className="btn bg-success text-white p-3 ms-2 ">
+                <Link to="/login" className="btn bg-success text-white p-3 ms-2 ">
                   Start Learning
                 </Link>
               </div>

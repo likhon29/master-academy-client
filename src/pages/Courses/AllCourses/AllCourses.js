@@ -12,7 +12,7 @@ const AllCourses = () => {
      
       <Row>
         <Col lg="9">
-        <h1>All Courses Category:{allCourses.length}</h1>
+        <h1 style={{ color: "black", borderBottom: "5px solid black", marginBottom:'30px',width:'75%'}}>All Courses Category:{allCourses.length}</h1>
       <div className="course-container">
         {allCourses.map((course) => (
           <CourseCard key={course.id} course={course}></CourseCard>

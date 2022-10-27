@@ -13,7 +13,7 @@ const LeftNav = ({course}) => {
             <div className='mt-1'>
                 
                 <ListGroup className='text-white'>
-                    <ListGroup.Item className='bg-success mb-1'> <Link className='btn btn-none' to={`${id}`}><span className='text-warning  me-2'>{course_name}</span>  <span className='text-white '>({ course_group})</span><span className='text-white '>-{ category_name}</span></Link></ListGroup.Item>
+                    <ListGroup.Item className='bg-success mb-1'> <Link className='btn btn-none' to={`${id}`}><span className='text-warning  me-1'>{course_name}</span><span className='text-white text-uppercase '>-{ category_name}</span> <span className='text-white text-uppercase '>({ course_group})</span></Link></ListGroup.Item>
                     
                     
                 </ListGroup>

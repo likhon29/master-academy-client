@@ -5,11 +5,13 @@ import { useLoaderData,Link } from "react-router-dom";
 import LeftNav from "../LeftNav/LeftNav";
 import './CourseDetails.css'
 import { createRef } from "react";
-const ref = createRef();
+import { FaFileDownload } from 'react-icons/fa'
 const CourseDetail = () => {
+  const ref = createRef();
   const courseInfo = useLoaderData();
   const {
     id,
+    category_name,
     course_prize,
     course_name,
     course_group,
@@ -19,16 +21,18 @@ const CourseDetail = () => {
   } = courseInfo;
   return (
     <div className="container">
-       <h3 style={{ textAlign: "left" }}>Course Details</h3>
+       <h3 style={{ color: "black", borderBottom: "5px solid black", marginBottom:'30px',width:'50%'}}>Course Details</h3>
       
       
       
       <Container  className="details-container">
         <Row>
           <Col lg="12"> <Card className="mx-auto  w-50 ">
-          <div className="header d-flex  justify-content-center  my-2">
-          <Card.Title className="text-center fs-2 text-dark">{course_name}</Card.Title> <Pdf targetRef={ref} filename="course-details.pdf">
-        {({ toPdf }) => <button className="btn btn-danger mx-2 text-white" onClick={toPdf}>About</button>}
+          <div className="header d-flex  justify-content-between  m-2">
+              <Card.Title className="text-center fs-3 text-primary">{course_name}</Card.Title>
+              <h2 className="text-uppercase">{ category_name }</h2>
+              <Pdf targetRef={ref} filename={`${course_name}.pdf`}>
+        {({ toPdf }) => <button className="btn btn-danger me-0  text-white" onClick={toPdf}>Curriculum <FaFileDownload></FaFileDownload></button>}
       </Pdf>
        </div>
           

@@ -18,12 +18,12 @@ const SscCourseContainer = () => {
         );
         setCourses(sscCourses);
       });
-  }, [courses]);
+  }, []);
   return (
     <Container className="mt-4">
       <Row>
         <Col lg="9">
-          <h4>Course of SSC:{courses.length}</h4>
+          <h4 style={{ color: "black", borderBottom: "5px solid black", marginBottom:'30px',width:'50%'}}>Course of SSC:{courses.length}</h4>
 
           <div className="course-container">
             {courses.map((course) => (

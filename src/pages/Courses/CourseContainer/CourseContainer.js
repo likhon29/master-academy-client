@@ -14,7 +14,7 @@ const CourseContainer = () => {
      
       <Row >
         <Col lg="9">
-        <h4>All Courses Category:{courses.length}</h4>
+        <h3 style={{ color: "black", borderBottom: "5px solid black", marginBottom:'30px',width:'50%'}}>All Courses Category:{courses.length}</h3>
       <div className="course-container">
         {courses.map((course) => (
           <CourseCard key={course.id} course={course}></CourseCard>
@@ -22,7 +22,7 @@ const CourseContainer = () => {
       </div>
         </Col>
           <Col lg="3">
-          <h5>Course List</h5>
+          <h3 style={{ color: "black", borderBottom: "5px solid black", marginBottom:'30px',width:'50%'}}>Course List</h3>
             {
               courses.map((course) => <LeftNav key={course.id} course={course}></LeftNav> )
             }

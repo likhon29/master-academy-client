@@ -39,18 +39,15 @@ const Header = () => {
             <Navbar.Brand className=" text-white" as={Link} to="/">
               <img src={logo} width="300px" height="100px" alt="" />{" "}
             </Navbar.Brand>
-            <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
-            <Navbar.Offcanvas
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            {/* <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} /> */}
+            {/* <Navbar.Offcanvas
               id={`offcanvasNavbar-expand-${expand}`}
               aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
               placement="end"
-            >
-              <Offcanvas.Header closeButton>
-                {/* <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
-            Master Academy
-          </Offcanvas.Title> */}
-              </Offcanvas.Header>
-              <Offcanvas.Body>
+            > */}
+              <Navbar.Collapse id="responsive-navbar-nav">
+              {/* <Offcanvas.Body> */}
                 <Nav className=" justify-content-end flex-grow-1 px-5 fs-5">
                   <Nav.Link className=" me-5" as={Link} to="/">
                     Home
@@ -90,10 +87,15 @@ const Header = () => {
                               ></Image>
                             </>
                           ) : (
-                            <FaUser
-                              title={user?.displayName}
-                              className="fs-2 mt-2"
-                            ></FaUser>
+                            
+                             
+                               
+                            
+                              <FaUser
+                                title={user?.displayName || 'Unknown'}
+                                className="fs-2 mt-2"
+                              ></FaUser>  
+                            
                           )}
                         </OverlayTrigger>
                       </>
@@ -118,7 +120,7 @@ const Header = () => {
                     ) : (
                       <>
                         <Nav.Link
-                          className=" text-white btn btn-primary pt-0 px-5"
+                          className=" text-white btn btn-primary py-auto px-5"
                           as={Link}
                           to="/login"
                         >
@@ -129,8 +131,9 @@ const Header = () => {
                   </>
                   {/* </Nav.Link> */}
                 </Nav>
-              </Offcanvas.Body>
-            </Navbar.Offcanvas>
+              {/* </Offcanvas.Body> */}
+            {/* </Navbar.Offcanvas> */}
+            </Navbar.Collapse>
           </Container>
         </Navbar>
       ))}
