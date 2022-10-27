@@ -15,6 +15,7 @@ import Login from "../pages/Login/Login/Login";
 import Register from "../pages/Login/Register/Register";
 import NotFound from "../pages/Others/NotFound/NotFound";
 import Profile from "../pages/Others/Profile/Profile";
+import TermsAndConditions from "../pages/Others/TermsAndCondition/TermsAndConditions";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 
 export const routes = createBrowserRouter([
@@ -127,8 +128,12 @@ export const routes = createBrowserRouter([
             },
             {
                 path: '/profile',
-                element: <Profile></Profile>,
-            }
+                element: <PrivateRoute><Profile></Profile></PrivateRoute>
+            },
+            {
+                path: '/terms',
+                element: <TermsAndConditions></TermsAndConditions>
+            },
             ],
     },
     {
