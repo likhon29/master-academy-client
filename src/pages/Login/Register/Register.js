@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { ButtonGroup, Col, Container, Image, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { Link ,useNavigate} from "react-router-dom";
+import { Link ,useLocation,useNavigate} from "react-router-dom";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import account1 from "../../../assets/images/account1.png";
 import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
@@ -11,19 +11,26 @@ import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import './Register.css'
 const Login = () => {
   const [error, setError] = useState("");
-  // const [passwordError, setPasswordError] = useState('');
+
   const [accept, setAccept] = useState(false);
+
   const { createUser, verifyEmail, updateUserProfile ,providerLogin,loading,setLoading,} =
     useContext(AuthContext);
+  
+    const navigate = useNavigate();
+    const location = useLocation();
+  
+    const from = location.state?.from?.pathname || '/';
+  
   const googleProvider = new GoogleAuthProvider();
   const gitHubProvider = new GithubAuthProvider();
-  const navigate = useNavigate();
   const handleGoogleSignIn = () => {
     setLoading(true);
     providerLogin(googleProvider)
       .then(result => {
         const user = result.user;
         console.log(user);
+        navigate(from, { replace: true });
       })
       .catch(error => console.error(error))
   }
@@ -36,18 +43,12 @@ const Login = () => {
         const user = result.user;
         console.log(user);
         handleEmailVerification();
+        navigate(from, { replace: true });
       })
       .catch(error => console.error(error))
   }
   
-  // const handleGitHubSignIn = () => {
-  //   providerLogin(googleProvider)
-  //     .then(result => {
-  //       const user = result.user;
-  //       console.log(user);
-  //     })
-  //     .catch(error => console.error(error))
-  // }
+  
 
   const handleSubmit = (event) => {
     event.preventDefault();
