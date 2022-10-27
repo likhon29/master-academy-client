@@ -1,6 +1,7 @@
     import React from 'react';
     import { CDBFooter, CDBFooterLink, CDBBtn, CDBIcon, CDBContainer,CDBBox } from 'cdbreact';
     import logo from '../../../assets/images/logo.png'
+    import { Link } from "react-router-dom";
     const Footer = () => {
         return (
             <CDBFooter className="shadow mt-5 bg-warning">
@@ -12,14 +13,14 @@
         style={{ width: '80%' }}
       >
         <CDBBox display="flex" alignItems="center">
-          <a href="/" className="d-flex align-items-center p-0 text-dark">
+          <Link to="/" className="d-flex align-items-center p-0 text-dark">
             <img
               alt="logo"
               src={logo}
               width="120px"
             />
             <span className="ms-2 ml-4 h5 mb-0 font-weight-bold">Master Academy</span>
-          </a>
+          </Link>
         </CDBBox>
         <CDBBox>
           <small className="ml-2">&copy; Master Academy, 2022. All rights reserved.</small>
