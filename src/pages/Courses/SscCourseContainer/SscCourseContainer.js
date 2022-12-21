@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useLoaderData } from "react-router-dom";
+import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
+import Loading from "../../Shared/Loading/Loading";
 import CourseCard from "../CourseCard/CourseCard";
 import LeftNav from "../LeftNav/LeftNav";
 const SscCourseContainer = () => {
   const [courses, setCourses] = useState([]);
   // const sscCourses = useLoaderData();
+  const {isLoading,setIsLoading,} =
+    useState(true);
   console.log(courses);
   useEffect(() => {
     fetch("https://master-academy-server.vercel.app/allCourses")
@@ -17,8 +21,14 @@ const SscCourseContainer = () => {
           (course) => course.category_name === "ssc"
         );
         setCourses(sscCourses);
+        setIsLoading(false);
       });
-  }, []);
+  }, [setIsLoading]);
+
+  if (isLoading)
+  {
+    <Loading></Loading>
+    }
   return (
     <Container className="mt-4">
       <Row>
